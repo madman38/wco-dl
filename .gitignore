@@ -1,0 +1,7 @@
+*
+!*/
+__pycache__/
+!helpers/*
+!.gitignore
+!main.py
+!requirements.txt
