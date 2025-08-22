@@ -67,7 +67,7 @@ if links:
     cartoon_path = os.path.join(f"{cwd}/cartoons", cartoon_path)
     
     print(f">> cartoon name: {cartoon_name}")
-    print(f">> found {len(links)} episodes")
+    print(f">> found {len(links)} episodes in total")
 
     seasons = fetchSeasons(links)
     total_seasons = len(seasons)

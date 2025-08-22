@@ -35,11 +35,12 @@ def fetchCartoon(url):
             print(">> warning: could not extract cartoon name")
 
         img_url = driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div[1]/div[2]/img").get_attribute("src")
-        img_path = os.path.join(f"{os.getcwd()}/cartoon_posters", cartoon_path+".jpg")
+        filename = cartoon_path+".jpg"
+        img_path = os.path.join(f"{os.getcwd()}/cartoon_posters", filename)
 
         with open(img_path, "wb") as file:
             file.write(requests.get(img_url).content)
-        print(f">> cartoon poster downloaded: {cartoon_name}")
+        print(f">> cartoon poster downloaded: {filename}")
 
         sidebar = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="sidebar_right3"]')))
         episode_divs = sidebar.find_elements(By.CLASS_NAME, "cat-eps")
@@ -54,8 +55,6 @@ def fetchCartoon(url):
                 print(">> warning: could not extract link from div")
 
         episode_links.reverse()
-        
-        print(f">> found {len(episode_links)} episodes in total")
         return cartoon_name, cartoon_path, episode_links
         
     except:
