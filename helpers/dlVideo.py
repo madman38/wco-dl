@@ -10,10 +10,6 @@ def dlVideo(url, filename, directory):
         print(">> error: URL, filename, and directory must be provided.")
         return False
 
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0"
-    }
-
     if not os.path.exists(directory):
         os.makedirs(directory)
         print(f">> created directory: {directory}")
@@ -21,10 +17,14 @@ def dlVideo(url, filename, directory):
     filepath = os.path.join(directory, filename + ".mp4")
 
     try:
-        dl_link = fetchDLLink(url)
+        dl_link, user_agent = fetchDLLink(url)
         if not dl_link:
             print(">> failed to fetch download link")
             return False
+
+        headers = {
+            "User-Agent": user_agent
+        }
 
         clean_url = dl_link.replace('\\/', '/').replace('\\\\', '\\')
         response = requests.get(clean_url, headers=headers)

@@ -29,7 +29,8 @@ def fetchDLLink(url):
                                 result = f"{server}/getvid?evid={enc_value}"
                                 response = requests.get(result, allow_redirects=True)
                                 dl_link = response.url
-                                return dl_link
+                                user_agent = request.headers.get('User-Agent')
+                                return dl_link, user_agent
                         except json.JSONDecodeError:
                             print(">> failed to parse JSON response.")
             print(f">> XHR not found. Trying again...({i+1})")
