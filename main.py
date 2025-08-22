@@ -6,6 +6,7 @@ import os
 
 cwd = os.getcwd()
 os.makedirs(f"{cwd}/cartoons", exist_ok=True)
+os.makedirs(f"{cwd}/cartoon_posters", exist_ok=True)
 
 def get_season_range(total_seasons):
     '''Get season range from user input - supports mixed formats like "1-3,5,7-9"'''

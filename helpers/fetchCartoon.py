@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
+import requests
 
 def fetchCartoon(url):
     '''Fetches cartoon name and all episode links from the sidebar, returns them in correct order (first episode first)'''
@@ -31,6 +33,13 @@ def fetchCartoon(url):
             print(f">> found cartoon: {cartoon_name}")
         except:
             print(">> warning: could not extract cartoon name")
+
+        img_url = driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div[1]/div[2]/img").get_attribute("src")
+        img_path = os.path.join(f"{os.getcwd()}/cartoon_posters", cartoon_path+".jpg")
+
+        with open(img_path, "wb") as file:
+            file.write(requests.get(img_url).content)
+        print(f">> cartoon poster downloaded: {cartoon_name}")
 
         sidebar = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="sidebar_right3"]')))
         episode_divs = sidebar.find_elements(By.CLASS_NAME, "cat-eps")
