@@ -60,7 +60,7 @@ def get_season_range(total_seasons):
             print(">> error: Invalid input format. Please try again.")
             continue
 
-cartoon_url = input("> Enter the cartoon url (eg https://www.wcoflix.tv/anime/batman-the-animated-series): ").strip()
+cartoon_url = input("> Enter the cartoon url (e.g., https://www.wcoflix.tv/anime/batman-the-animated-series): ").strip()
 
 cartoon_name, cartoon_path, links = fetchCartoon(cartoon_url)
 if links:
@@ -76,7 +76,7 @@ if links:
     
     if total_seasons > 1:
         selected_seasons = get_season_range(total_seasons)
-        print(f">> selected seasons: {selected_seasons}")
+        print(f"\n>> selected seasons: {selected_seasons}\n")
     else:
         selected_seasons = [1]
         print(">> only 1 season available, downloading all episodes")
