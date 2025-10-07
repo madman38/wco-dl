@@ -6,8 +6,8 @@ wco-dl is a tool to download cartoons/animes from [WCOfun](https://www.wcofun.co
 
 - Python 3.7+
 - requests
-- selenium
-- selenium-wire
+- selenium==4.14.0
+- selenium-wire==5.1.0
 - blinker==1.7.0
 
 ## Installation
