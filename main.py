@@ -85,10 +85,30 @@ if links:
     total_episodes = 0
     skipped_episodes = 0
 
+    def format_filename(url, season_num, episode_num, cartoon_path):
+        """Create filename in the format: show.name.SXXEXX.episode.title"""
+        show_name = os.path.basename(cartoon_path)
+        
+        parts = url.split('/')[-1].split('-')
+        title_start = False
+        title_parts = []
+        for part in parts:
+            if 'episode' in part:
+                title_start = True
+                continue
+            if title_start:
+                if not part.isdigit():
+                    title_parts.append(part)
+        
+        episode_title = '.'.join(title_parts)
+        
+        return f"{show_name}.S{season_num:02d}E{episode_num:02d}.{episode_title}"
+
     for season_num in selected_seasons:
         if season_num in seasons:
             season_episodes = seasons[season_num]
-            season_folder = f"S{season_num}"
+            show_name = os.path.basename(cartoon_path)
+            season_folder = f"{show_name}.S{season_num:02d}"
             season_path = os.path.join(cartoon_path, season_folder)
             
             print(f">> processing season {season_num} with {len(season_episodes)} episodes")
@@ -98,7 +118,7 @@ if links:
                 print(f">> found {len(existing_episodes)} existing episodes in season {season_num}")
             
             for i, link in enumerate(season_episodes):
-                episode_filename = f"S{season_num}E{i+1}"
+                episode_filename = format_filename(link, season_num, i+1, cartoon_path)
                 total_episodes += 1
 
                 if checkIfExists(episode_filename, season_path):
@@ -132,7 +152,7 @@ if links:
                 print(f">> skipping retry for {episode['filename']} (now exists)")
                 continue
 
-            print(f">> retrying: S{episode['season']}E{episode['episode']}")
+            print(f">> retrying: S{episode['season']:02d}E{episode['episode']:02d}")
             success = dlVideo(episode['url'], episode['filename'], episode['season_path'])
             
             if not success:
@@ -141,7 +161,7 @@ if links:
         if retry_missing:
             print(f"\n>> warning: {len(retry_missing)} episodes could not be downloaded:")
             for episode in retry_missing:
-                print(f"   - S{episode['season']}E{episode['episode']}: {episode['url']}")
+                print(f"   - S{episode['season']:02d}E{episode['episode']:02d}: {episode['url']}")
         else:
             print("\n>> all missing episodes successfully downloaded on retry!")
     else:

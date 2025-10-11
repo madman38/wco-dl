@@ -28,7 +28,7 @@ def fetchCartoon(url):
             cartoon_path = cartoon_name
             for char in unwanted_chars:
                 cartoon_path = cartoon_path.replace(char, '')
-            cartoon_path = cartoon_path.replace(' ', '_')
+            cartoon_path = cartoon_path.replace(' ', '.')
 
             print(f">> found cartoon: {cartoon_name}")
         except:
