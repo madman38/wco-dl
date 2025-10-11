@@ -24,7 +24,7 @@ def fetchCartoon(url):
             cartoon_element = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div/div[1]/div[1]/h1/div/a')))
             cartoon_name = cartoon_element.text.strip()
 
-            unwanted_chars = ['\\', '/', ':', '"', '?', '<', '>', '|']
+            unwanted_chars = ['\\', '/', ':', '"', '?', '<', '>', '|', '*', '+', '.', ',', ';', '=', '[', ']', '{', '}', '(', ')', '!', '@', '#', '$', '%', '^', '&']
             cartoon_path = cartoon_name
             for char in unwanted_chars:
                 cartoon_path = cartoon_path.replace(char, '')
