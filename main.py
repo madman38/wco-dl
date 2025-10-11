@@ -10,7 +10,8 @@ os.makedirs(f"{cwd}/cartoon_posters", exist_ok=True)
 
 def get_season_range(total_seasons):
     '''Get season range from user input - supports mixed formats like "1-3,5,7-9"'''
-    print(f"\n>> total seasons available: {total_seasons}")
+    available_seasons = list(range(1, total_seasons + 1))
+    print(f"\n>> available seasons: {available_seasons}")
     
     while True:
         try:
