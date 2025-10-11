@@ -101,7 +101,7 @@ if links:
                 if not part.isdigit():
                     title_parts.append(part)
         
-        episode_title = '.'.join(title_parts)
+        episode_title = '.'.join(title_parts).title()
         
         return f"{show_name}.S{season_num:02d}E{episode_num:02d}.{episode_title}"
 
