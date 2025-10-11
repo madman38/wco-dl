@@ -106,7 +106,7 @@ if links:
                     skipped_episodes += 1
                     continue
                 
-                print(f">> downloading episode: {link}")
+                print(f"\n>> downloading episode: {link}")
                 success = dlVideo(link, episode_filename, season_path)
                 
                 if not success:

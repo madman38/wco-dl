@@ -34,12 +34,12 @@ def dlVideo(url, filename, directory):
                 for chunk in response.iter_content(chunk_size=8192):
                     video_file.write(chunk)
             end_time = time.time()
-            print(f">> video downloaded successfully to {filepath} ({round(end_time - start_time, 2)} seconds)")
+            print(f">> episode downloaded successfully to {filepath} ({round(end_time - start_time, 2)} seconds)")
             return True
         else:
-            print(f">> failed to download video. Status code: {response.status_code}")
+            print(f">> failed to download episode. Status code: {response.status_code}")
             return False
 
     except Exception as e:
-        print(f">> an error occurred while downloading the video: {e}")
+        print(f">> an error occurred while downloading the episode: {e}")
         return False
