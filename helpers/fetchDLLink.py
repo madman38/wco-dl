@@ -20,9 +20,17 @@ def fetchDLLink(url):
             driver.implicitly_wait(5)
 
             try:
-                iframe = driver.find_element("xpath", '//*[@id="cizgi-js-0"]')
-                driver.switch_to.frame(iframe)
-                print(">> switched to iframe cizgi-js-0")
+                try:
+                    iframe = driver.find_element("xpath", '//*[@id="cizgi-js-0"]')
+                    driver.switch_to.frame(iframe)
+                    iframe_id = "cizgi-js-0"
+
+                except:
+                    iframe = driver.find_element("xpath", '//*[@id="anime-js-0"]')
+                    driver.switch_to.frame(iframe)
+                    iframe_id = "anime-js-0"
+
+                print(f">> switched to iframe {iframe_id}")
             except Exception as e:
                 print(f">> could not find iframe: {e}")
 
